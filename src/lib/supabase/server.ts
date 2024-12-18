@@ -39,7 +39,6 @@ export const getUserOrRedirect = async (
   } = await supabase.auth.getUser();
 
   if (!user || error) {
-    console.error("No user found or error fetching user:", error);
     redirect(redirectTo);
   }
 

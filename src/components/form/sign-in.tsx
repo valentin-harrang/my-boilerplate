@@ -53,7 +53,7 @@ const SignInForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="email"
@@ -88,6 +88,7 @@ const SignInForm = () => {
         />
         <Button
           type="submit"
+          className="w-full"
           disabled={!form.formState.isValid || form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "En cours..." : "Se connecter"}
