@@ -1,4 +1,3 @@
-import SignOutForm from "@/components/form/sign-out";
 import { getUserOrRedirect } from "@/lib/supabase/server";
 
 const DashboardPage = async () => {
@@ -8,7 +7,6 @@ const DashboardPage = async () => {
     <>
       <h1>Tableau de bord Page</h1>
       {user.email}
-      <SignOutForm />
     </>
   );
 };

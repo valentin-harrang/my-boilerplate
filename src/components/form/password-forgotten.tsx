@@ -71,6 +71,7 @@ const PasswordForgottenForm = () => {
         />
         <Button
           type="submit"
+          className="w-full"
           disabled={!form.formState.isValid || form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "En cours..." : "Envoyer"}

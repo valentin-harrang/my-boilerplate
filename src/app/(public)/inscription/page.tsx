@@ -1,12 +1,10 @@
 import SignUpForm from "@/components/form/sign-up";
+import AuthPageLayout from "@/components/layout/auth-page";
 
-const SignUpPage = () => {
-  return (
-    <>
-      <h1>Inscription Page</h1>
-      <SignUpForm />
-    </>
-  );
-};
+const SignUpPage = () => (
+  <AuthPageLayout title="Inscription" image="/placeholder.svg">
+    <SignUpForm />
+  </AuthPageLayout>
+);
 
 export default SignUpPage;

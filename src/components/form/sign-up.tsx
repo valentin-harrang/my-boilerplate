@@ -58,53 +58,55 @@ const SignUpForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
-        <FormField
-          control={form.control}
-          name="firstName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Prénom</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Ex : Jean"
-                  className="capitalize"
-                  {...field}
-                  onChange={(e) =>
-                    field.onChange(
-                      e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase()
-                    )
-                  }
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="lastName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nom</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Ex : Dupont"
-                  className="capitalize"
-                  {...field}
-                  onChange={(e) =>
-                    field.onChange(
-                      e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase()
-                    )
-                  }
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="firstName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Prénom</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Ex : Jean"
+                    className="capitalize"
+                    {...field}
+                    onChange={(e) =>
+                      field.onChange(
+                        e.target.value.charAt(0).toUpperCase() +
+                          e.target.value.slice(1).toLowerCase()
+                      )
+                    }
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nom</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Ex : Dupont"
+                    className="capitalize"
+                    {...field}
+                    onChange={(e) =>
+                      field.onChange(
+                        e.target.value.charAt(0).toUpperCase() +
+                          e.target.value.slice(1).toLowerCase()
+                      )
+                    }
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="email"
@@ -144,6 +146,7 @@ const SignUpForm = () => {
         />
         <Button
           type="submit"
+          className="w-full"
           disabled={!form.formState.isValid || form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "En cours..." : "S'inscrire"}

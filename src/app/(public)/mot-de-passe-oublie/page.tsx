@@ -1,12 +1,10 @@
 import PasswordForgottenForm from "@/components/form/password-forgotten";
+import AuthPageLayout from "@/components/layout/auth-page";
 
-const PasswordForgottenPage = () => {
-  return (
-    <>
-      <h1>Mot de passe oublié Page</h1>
-      <PasswordForgottenForm />
-    </>
-  );
-};
+const PasswordForgottenPage = () => (
+  <AuthPageLayout title="Mot de passe oublié" image="/placeholder.svg">
+    <PasswordForgottenForm />
+  </AuthPageLayout>
+);
 
 export default PasswordForgottenPage;
