@@ -18,8 +18,14 @@ import resetPasswordFormSchema from "@/schema/reset-password-form";
 import { resetPasswordAction } from "@/app/actions";
 import { PasswordStrengthIndicator } from "./password-strength-indicator";
 import { usePasswordStrength } from "@/hooks/use-password-strength";
+import { useState } from "react";
+import PasswordToggleIcon from "@/components/form/password-toggle-icon";
 
 const ResetPasswordForm = () => {
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    password: false,
+    passwordConfirmation: false,
+  });
   const form = useForm<z.infer<typeof resetPasswordFormSchema>>({
     resolver: zodResolver(resetPasswordFormSchema),
     mode: "onChange",
@@ -31,6 +37,12 @@ const ResetPasswordForm = () => {
 
   const password = form.watch("password");
   const passwordStrength = usePasswordStrength(password);
+
+  const togglePasswordVisibility = (
+    field: "password" | "passwordConfirmation"
+  ) => {
+    setPasswordVisibility((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
 
   const onSubmit = async (values: z.infer<typeof resetPasswordFormSchema>) => {
     const formData = new FormData();
@@ -62,7 +74,32 @@ const ResetPasswordForm = () => {
             <FormItem>
               <FormLabel>Nouveau mot de passe</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="******" {...field} />
+                <div className="relative">
+                  <Input
+                    type={passwordVisibility.password ? "text" : "password"}
+                    placeholder="******"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    {...field}
+                  />
+                  <Button
+                    tabIndex={-1}
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => togglePasswordVisibility("password")}
+                    aria-label={
+                      passwordVisibility.password
+                        ? `Hide password`
+                        : `Show password`
+                    }
+                  >
+                    <PasswordToggleIcon
+                      isVisible={passwordVisibility.password}
+                    />
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
               {password && (
@@ -81,7 +118,38 @@ const ResetPasswordForm = () => {
             <FormItem>
               <FormLabel>Confirmez le mot de passe</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="******" {...field} />
+                <div className="relative">
+                  <Input
+                    type={
+                      passwordVisibility.passwordConfirmation
+                        ? "text"
+                        : "password"
+                    }
+                    placeholder="******"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    {...field}
+                  />
+                  <Button
+                    tabIndex={-1}
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() =>
+                      togglePasswordVisibility("passwordConfirmation")
+                    }
+                    aria-label={
+                      passwordVisibility.passwordConfirmation
+                        ? `Hide password confirmation`
+                        : `Show password confirmation`
+                    }
+                  >
+                    <PasswordToggleIcon
+                      isVisible={passwordVisibility.passwordConfirmation}
+                    />
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
