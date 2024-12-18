@@ -14,14 +14,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
-import { updateUserAction } from "@/app/actions";
+import { updateUserAction, uploadImageAction } from "@/app/actions";
 import { profileFormSchema } from "@/schema/profile-form";
 import { Textarea } from "@/components/ui/textarea";
 import DropzoneUpload from "@/components/form/dropzone-upload";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { UserProfile } from "@/types/user";
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 
 const ProfileForm = ({
   user,
@@ -39,7 +38,7 @@ const ProfileForm = ({
     resolver: zodResolver(profileFormSchema),
     mode: "onChange",
     defaultValues: {
-      email: user.email,
+      email: user.email ?? "",
       firstName: userProfile.first_name ?? "",
       lastName: userProfile.last_name ?? "",
       description: userProfile.description ?? "",
@@ -51,40 +50,18 @@ const ProfileForm = ({
   const handleImageUpload = async () => {
     if (!selectedImage) return previewImage || "";
 
-    const supabase = createClient();
-    const { error } = await supabase.storage
-      .from("avatars")
-      .upload(`${user.id}/profile-pic.png`, selectedImage, {
-        cacheControl: "3600",
-        upsert: true,
-      });
+    const response = await uploadImageAction(user.id, selectedImage, "avatars");
 
-    if (error) {
-      toast.error("Échec de l'upload de la photo de profil.");
-      console.error(error);
+    if (!response.success) {
+      toast.error(response.message);
       return previewImage || "";
     }
 
-    const { data } = supabase.storage
-      .from("avatars")
-      .getPublicUrl(`${user.id}/profile-pic.png`);
-
-    return data?.publicUrl || "";
+    return response.publicUrl;
   };
 
   const handleImageDelete = async () => {
     if (!previewImage) return;
-
-    const supabase = createClient();
-
-    const filePath = `${user.id}/profile-pic.png`;
-    const { error } = await supabase.storage.from("avatars").remove([filePath]);
-
-    if (error) {
-      toast.error("Échec de la suppression de la photo de profil.");
-      console.error(error);
-      return;
-    }
 
     const response = await updateUserAction(user.id, { avatar_url: null });
 
@@ -110,7 +87,7 @@ const ProfileForm = ({
 
       if (response.success) {
         toast.success(response.message);
-        setPreviewImage(avatarUrl);
+        setPreviewImage(avatarUrl || null);
       } else {
         toast.error(response.message);
       }

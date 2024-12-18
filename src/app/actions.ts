@@ -196,3 +196,36 @@ export const updateUserAction = async (
     message: "Utilisateur mis à jour avec succès.",
   };
 };
+
+export const uploadImageAction = async (
+  userId: string,
+  file: File,
+  storagePath: string
+) => {
+  const supabase = await createClient();
+
+  const filePath = `${userId}/${file.name}`;
+  const { error } = await supabase.storage
+    .from(storagePath)
+    .upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: true,
+    });
+
+  if (error) {
+    return {
+      success: false,
+      message: "Échec de l'upload de l'image.",
+    };
+  }
+
+  const { data } = supabase.storage
+    .from(storagePath)
+    .getPublicUrl(filePath);
+
+  return {
+    success: true,
+    message: "Image uploadée avec succès.",
+    publicUrl: data?.publicUrl || null,
+  };
+};
