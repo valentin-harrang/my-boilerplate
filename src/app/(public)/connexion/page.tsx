@@ -2,13 +2,13 @@ import SignInForm from "@/components/form/sign-in";
 import Image from "next/image";
 
 const SignInPage = () => (
-  <div className="flex min-h-screen flex-col md:flex-row bg-gray-50">
+  <div className="flex flex-col md:flex-row h-full">
     <div className="relative hidden md:block md:w-1/2">
       <Image
         src="/placeholder.svg"
         alt="Sign in background"
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         priority
       />
     </div>

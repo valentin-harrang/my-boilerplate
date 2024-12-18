@@ -5,8 +5,6 @@ const MyAccountPage = async () => {
   const user = await getUserOrRedirect();
   const userProfile = await getUserProfile(user.id);
 
-  console.log("userProfile", userProfile);
-
   if (!userProfile) {
     return <p>Impossible de charger le profil utilisateur.</p>;
   }

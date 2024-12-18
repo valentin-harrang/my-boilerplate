@@ -17,7 +17,7 @@ const SignOutForm = () => {
   return (
     <form onSubmit={handleSignOut}>
       <Button type="submit" variant="ghost" className="p-0 h-auto">
-        <LogOut className="mr-2 h-4 w-4" />
+        <LogOut className="mr-2 size-4" />
         <span>Déconnexion</span>
       </Button>
     </form>
