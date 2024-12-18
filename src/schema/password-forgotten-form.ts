@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const PasswordForgottenFormSchema = z.object({
+const passwordForgottenFormSchema = z.object({
   email: z
     .string({
       required_error: "Veuillez saisir une adresse e-mail valide.",
@@ -10,4 +10,4 @@ const PasswordForgottenFormSchema = z.object({
     }),
 });
 
-export default PasswordForgottenFormSchema;
+export default passwordForgottenFormSchema;

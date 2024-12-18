@@ -14,12 +14,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
-import PasswordForgottenFormSchema from "@/schema/password-forgotten-form";
+import passwordForgottenFormSchema from "@/schema/password-forgotten-form";
 import { passwordForgottenAction } from "@/app/actions";
 
 const PasswordForgottenForm = () => {
-  const form = useForm<z.infer<typeof PasswordForgottenFormSchema>>({
-    resolver: zodResolver(PasswordForgottenFormSchema),
+  const form = useForm<z.infer<typeof passwordForgottenFormSchema>>({
+    resolver: zodResolver(passwordForgottenFormSchema),
     mode: "onChange",
     defaultValues: {
       email: "",
@@ -27,7 +27,7 @@ const PasswordForgottenForm = () => {
   });
 
   const onSubmit = async (
-    values: z.infer<typeof PasswordForgottenFormSchema>
+    values: z.infer<typeof passwordForgottenFormSchema>
   ) => {
     const formData = new FormData();
     formData.append("email", values.email);
@@ -60,6 +60,8 @@ const PasswordForgottenForm = () => {
                 <Input
                   type="email"
                   placeholder="jean.dupont@exemple.com"
+                  autoCapitalize="none"
+                  autoCorrect="off"
                   {...field}
                 />
               </FormControl>

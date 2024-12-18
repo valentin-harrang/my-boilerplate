@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { REGEX } from "@/constants/regex";
 
-const ResetPasswordFormSchema = z
+const resetPasswordFormSchema = z
   .object({
     password: z
       .string()
@@ -32,4 +32,4 @@ const ResetPasswordFormSchema = z
     message: "Les mots de passe ne correspondent pas.",
   });
 
-export default ResetPasswordFormSchema;
+export default resetPasswordFormSchema;

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const SignInFormSchema = z.object({
+const signInFormSchema = z.object({
   email: z
     .string({
       required_error: "Veuillez saisir une adresse e-mail valide.",
@@ -11,4 +11,4 @@ const SignInFormSchema = z.object({
   password: z.string(),
 });
 
-export default SignInFormSchema;
+export default signInFormSchema;

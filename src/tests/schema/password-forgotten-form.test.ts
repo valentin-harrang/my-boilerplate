@@ -1,12 +1,12 @@
-import PasswordForgottenFormSchema from "@/schema/password-forgotten-form";
+import passwordForgottenFormSchema from "@/schema/password-forgotten-form";
 
-describe("PasswordForgottenFormSchema", () => {
+describe("passwordForgottenFormSchema", () => {
   test("should validate a correct payload", () => {
     const validPayload = {
       email: "test@example.com",
     };
 
-    expect(() => PasswordForgottenFormSchema.parse(validPayload)).not.toThrow();
+    expect(() => passwordForgottenFormSchema.parse(validPayload)).not.toThrow();
   });
 
   test("should fail when email is invalid", () => {
@@ -14,7 +14,7 @@ describe("PasswordForgottenFormSchema", () => {
       email: "invalid-email",
     };
 
-    expect(() => PasswordForgottenFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => passwordForgottenFormSchema.parse(invalidPayload)).toThrow(
       /Veuillez saisir une adresse e-mail valide/
     );
   });
@@ -22,7 +22,7 @@ describe("PasswordForgottenFormSchema", () => {
   test("should fail when email is missing", () => {
     const invalidPayload = {};
 
-    expect(() => PasswordForgottenFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => passwordForgottenFormSchema.parse(invalidPayload)).toThrow(
       /Veuillez saisir une adresse e-mail valide/
     );
   });
@@ -30,6 +30,6 @@ describe("PasswordForgottenFormSchema", () => {
   test("should fail when payload is empty", () => {
     const invalidPayload = {};
 
-    expect(() => PasswordForgottenFormSchema.parse(invalidPayload)).toThrow();
+    expect(() => passwordForgottenFormSchema.parse(invalidPayload)).toThrow();
   });
 });

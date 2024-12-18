@@ -14,12 +14,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
-import SignInFormSchema from "@/schema/sign-in-form";
+import signInFormSchema from "@/schema/sign-in-form";
 import { signInAction } from "@/app/actions";
 
 const SignInForm = () => {
-  const form = useForm<z.infer<typeof SignInFormSchema>>({
-    resolver: zodResolver(SignInFormSchema),
+  const form = useForm<z.infer<typeof signInFormSchema>>({
+    resolver: zodResolver(signInFormSchema),
     mode: "onChange",
     defaultValues: {
       email: "",
@@ -27,7 +27,7 @@ const SignInForm = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof SignInFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof signInFormSchema>) => {
     const formData = new FormData();
     formData.append("email", values.email);
     formData.append("password", values.password);
@@ -64,6 +64,8 @@ const SignInForm = () => {
                 <Input
                   type="email"
                   placeholder="jean.dupont@exemple.com"
+                  autoCapitalize="none"
+                  autoCorrect="off"
                   {...field}
                 />
               </FormControl>

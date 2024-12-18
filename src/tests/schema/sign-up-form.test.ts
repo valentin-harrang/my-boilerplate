@@ -1,6 +1,6 @@
-import SignUpFormSchema from "@/schema/sign-up-form";
+import signUpFormSchema from "@/schema/sign-up-form";
 
-describe("SignUpFormSchema", () => {
+describe("signUpFormSchema", () => {
   test("should validate a correct payload", () => {
     const validPayload = {
       firstName: "Jean",
@@ -9,7 +9,7 @@ describe("SignUpFormSchema", () => {
       password: "Password1!",
     };
 
-    expect(() => SignUpFormSchema.parse(validPayload)).not.toThrow();
+    expect(() => signUpFormSchema.parse(validPayload)).not.toThrow();
   });
 
   test("should fail when password is missing a number", () => {
@@ -20,7 +20,7 @@ describe("SignUpFormSchema", () => {
       password: "Password!", // Missing a number
     };
 
-    expect(() => SignUpFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => signUpFormSchema.parse(invalidPayload)).toThrow(
       /doit contenir au moins un chiffre/
     );
   });
@@ -33,7 +33,7 @@ describe("SignUpFormSchema", () => {
       password: "Pwd1!",
     };
 
-    expect(() => SignUpFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => signUpFormSchema.parse(invalidPayload)).toThrow(
       /doit contenir au moins 8 caractères/
     );
   });
@@ -46,7 +46,7 @@ describe("SignUpFormSchema", () => {
       password: "Password1!",
     };
 
-    expect(() => SignUpFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => signUpFormSchema.parse(invalidPayload)).toThrow(
       /adresse e-mail valide/
     );
   });
@@ -59,7 +59,7 @@ describe("SignUpFormSchema", () => {
       password: "Password1!",
     };
 
-    expect(() => SignUpFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => signUpFormSchema.parse(invalidPayload)).toThrow(
       /ne doit contenir que des lettres, espaces, apostrophes ou tirets/
     );
   });

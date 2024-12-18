@@ -14,14 +14,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
-import SignUpFormSchema from "@/schema/sign-up-form";
+import signUpFormSchema from "@/schema/sign-up-form";
 import { usePasswordStrength } from "@/hooks/use-password-strength";
 import { PasswordStrengthIndicator } from "@/components/form/password-strength-indicator";
 import { signUpAction } from "@/app/actions";
 
 const SignUpForm = () => {
-  const form = useForm<z.infer<typeof SignUpFormSchema>>({
-    resolver: zodResolver(SignUpFormSchema),
+  const form = useForm<z.infer<typeof signUpFormSchema>>({
+    resolver: zodResolver(signUpFormSchema),
     mode: "onChange",
     defaultValues: {
       firstName: "",
@@ -34,7 +34,7 @@ const SignUpForm = () => {
   const password = form.watch("password");
   const passwordStrength = usePasswordStrength(password);
 
-  const onSubmit = async (values: z.infer<typeof SignUpFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
     const formData = new FormData();
     formData.append("firstName", values.firstName);
     formData.append("lastName", values.lastName);
@@ -115,6 +115,8 @@ const SignUpForm = () => {
                 <Input
                   type="email"
                   placeholder="jean.dupont@exemple.com"
+                  autoCapitalize="none"
+                  autoCorrect="off"
                   {...field}
                 />
               </FormControl>

@@ -1,12 +1,20 @@
-import { getUserOrRedirect } from "@/lib/supabase/server";
+import ProfileForm from "@/components/form/profile";
+import { getUserOrRedirect, getUserProfile } from "@/lib/supabase/server";
 
 const MyAccountPage = async () => {
   const user = await getUserOrRedirect();
+  const userProfile = await getUserProfile(user.id);
+
+  console.log("userProfile", userProfile);
+
+  if (!userProfile) {
+    return <p>Impossible de charger le profil utilisateur.</p>;
+  }
 
   return (
     <>
       <h1>Mon compte Page</h1>
-      <pre>{JSON.stringify(user, null, 2)}</pre>
+      <ProfileForm user={user} userProfile={userProfile} />
     </>
   );
 };

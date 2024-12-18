@@ -4,6 +4,13 @@ import { ROUTES } from "@/constants/routing";
 import { createClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 
+interface UpdateUserData {
+  description?: string | null;
+  first_name?: string | null;
+  last_name?: string | null;
+  avatar_url?: string | null;
+}
+
 export const signUpAction = async (formData: FormData) => {
   const firstName = formData.get("firstName")?.toString();
   const lastName = formData.get("lastName")?.toString();
@@ -149,5 +156,43 @@ export const signOutAction = async () => {
     success: true,
     message: "Déconnexion réussie.",
     redirect: ROUTES.SIGN_IN,
+  };
+};
+
+export const updateUserAction = async (
+  userId: string,
+  updateData: UpdateUserData
+) => {
+  const supabase = await createClient();
+
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .update(updateData)
+    .eq("id", userId);
+
+  const { first_name, last_name } = updateData;
+  let authError = null;
+
+  if (first_name || last_name) {
+    const { error } = await supabase.auth.updateUser({
+      data: {
+        user_metadata: { first_name, last_name },
+        display_name: `${first_name ?? ""} ${last_name ?? ""}`.trim(),
+      },
+    });
+    authError = error;
+  }
+
+  if (profileError || authError) {
+    return {
+      success: false,
+      message:
+        "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
+    };
+  }
+
+  return {
+    success: true,
+    message: "Utilisateur mis à jour avec succès.",
   };
 };

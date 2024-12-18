@@ -1,13 +1,13 @@
-import ResetPasswordFormSchema from "@/schema/reset-password-form";
+import resetPasswordFormSchema from "@/schema/reset-password-form";
 
-describe("ResetPasswordFormSchema", () => {
+describe("resetPasswordFormSchema", () => {
   test("should validate a strong password with matching confirmation", () => {
     const validPayload = {
       password: "Password1!",
       passwordConfirmation: "Password1!",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(validPayload)).not.toThrow();
+    expect(() => resetPasswordFormSchema.parse(validPayload)).not.toThrow();
   });
 
   test("should fail when passwords do not match", () => {
@@ -16,7 +16,7 @@ describe("ResetPasswordFormSchema", () => {
       passwordConfirmation: "Different1!",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => resetPasswordFormSchema.parse(invalidPayload)).toThrow(
       /Les mots de passe ne correspondent pas/
     );
   });
@@ -27,7 +27,7 @@ describe("ResetPasswordFormSchema", () => {
       passwordConfirmation: "Pwd1!",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => resetPasswordFormSchema.parse(invalidPayload)).toThrow(
       /doit contenir au moins 8 caractères/
     );
   });
@@ -38,7 +38,7 @@ describe("ResetPasswordFormSchema", () => {
       passwordConfirmation: "Password!",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => resetPasswordFormSchema.parse(invalidPayload)).toThrow(
       /doit contenir au moins un chiffre/
     );
   });
@@ -49,7 +49,7 @@ describe("ResetPasswordFormSchema", () => {
       passwordConfirmation: "password1!",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => resetPasswordFormSchema.parse(invalidPayload)).toThrow(
       /doit contenir au moins une lettre majuscule/
     );
   });
@@ -60,7 +60,7 @@ describe("ResetPasswordFormSchema", () => {
       passwordConfirmation: "PASSWORD1!",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => resetPasswordFormSchema.parse(invalidPayload)).toThrow(
       /doit contenir au moins une lettre minuscule/
     );
   });
@@ -71,7 +71,7 @@ describe("ResetPasswordFormSchema", () => {
       passwordConfirmation: "Password1",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => resetPasswordFormSchema.parse(invalidPayload)).toThrow(
       /doit contenir au moins un caractère spécial/
     );
   });
@@ -81,7 +81,7 @@ describe("ResetPasswordFormSchema", () => {
       password: "Password1!",
     };
 
-    expect(() => ResetPasswordFormSchema.parse(invalidPayload)).toThrow(
+    expect(() => resetPasswordFormSchema.parse(invalidPayload)).toThrow(
       /Veuillez confirmer votre mot de passe/
     );
   });

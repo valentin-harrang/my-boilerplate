@@ -14,14 +14,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
-import ResetPasswordFormSchema from "@/schema/reset-password-form";
+import resetPasswordFormSchema from "@/schema/reset-password-form";
 import { resetPasswordAction } from "@/app/actions";
 import { PasswordStrengthIndicator } from "./password-strength-indicator";
 import { usePasswordStrength } from "@/hooks/use-password-strength";
 
 const ResetPasswordForm = () => {
-  const form = useForm<z.infer<typeof ResetPasswordFormSchema>>({
-    resolver: zodResolver(ResetPasswordFormSchema),
+  const form = useForm<z.infer<typeof resetPasswordFormSchema>>({
+    resolver: zodResolver(resetPasswordFormSchema),
     mode: "onChange",
     defaultValues: {
       password: "",
@@ -32,7 +32,7 @@ const ResetPasswordForm = () => {
   const password = form.watch("password");
   const passwordStrength = usePasswordStrength(password);
 
-  const onSubmit = async (values: z.infer<typeof ResetPasswordFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof resetPasswordFormSchema>) => {
     const formData = new FormData();
     formData.append("password", values.password);
     formData.append("passwordConfirmation", values.passwordConfirmation);

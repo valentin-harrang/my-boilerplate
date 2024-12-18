@@ -39,8 +39,26 @@ export const getUserOrRedirect = async (
   } = await supabase.auth.getUser();
 
   if (!user || error) {
+    console.error("No user found or error fetching user:", error);
     redirect(redirectTo);
   }
 
   return user;
+};
+
+export const getUserProfile = async (userId: string) => {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching user profile:", error);
+    return null;
+  }
+
+  return data;
 };
