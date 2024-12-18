@@ -7,7 +7,7 @@ interface AuthPageLayoutProps {
 }
 
 const AuthPageLayout = ({ children, title, image }: AuthPageLayoutProps) => (
-  <div className="flex flex-col md:flex-row h-full">
+  <div className="flex flex-col md:flex-row h-full bg-gray-50">
     <div className="relative hidden md:block md:w-1/2">
       <Image
         src={image}
