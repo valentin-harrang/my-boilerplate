@@ -2,8 +2,10 @@
 
 import { headers } from "next/headers";
 
-import { ROUTES } from "@/constants/routing";
 import { createClient } from "@/lib/supabase/server";
+import { getLocale } from "next-intl/server";
+import { PATHNAMES } from "@/constants/routing";
+import { Locale } from "@/types/i18n";
 
 interface UpdateUserData {
   description?: string | null;
@@ -58,6 +60,7 @@ export const signInAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const supabase = await createClient();
+  const locale = (await getLocale()) as Locale;
 
   if (!email || !password) {
     return {
@@ -81,7 +84,7 @@ export const signInAction = async (formData: FormData) => {
   return {
     success: true,
     message: "Connexion réussie.",
-    redirect: ROUTES.DASHBOARD,
+    redirect: PATHNAMES["/tableau-de-bord"][locale],
   };
 };
 
@@ -89,13 +92,14 @@ export const passwordForgottenAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
+  const locale = (await getLocale()) as Locale;
 
   if (!email) {
     return { success: false, message: "L'email est obligatoire." };
   }
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/callback?redirect_to=${ROUTES.RESET_PASSWORD}`,
+    redirectTo: `${origin}/auth/callback?redirect_to=${PATHNAMES["/reinitialisation-mot-de-passe"][locale]}`,
   });
 
   if (error) {
@@ -145,6 +149,7 @@ export const resetPasswordAction = async (formData: FormData) => {
 export const signOutAction = async () => {
   const supabase = await createClient();
   const { error } = await supabase.auth.signOut();
+  const locale = (await getLocale()) as Locale;
 
   if (error) {
     return {
@@ -156,13 +161,13 @@ export const signOutAction = async () => {
   return {
     success: true,
     message: "Déconnexion réussie.",
-    redirect: ROUTES.SIGN_IN,
+    redirect: PATHNAMES["/connexion"][locale],
   };
 };
 
 export const updateUserAction = async (
   userId: string,
-  updateData: UpdateUserData
+  updateData: UpdateUserData,
 ) => {
   const supabase = await createClient();
 
@@ -201,7 +206,7 @@ export const updateUserAction = async (
 export const uploadImageAction = async (
   userId: string,
   file: File,
-  storagePath: string
+  storagePath: string,
 ) => {
   const supabase = await createClient();
 
@@ -220,9 +225,7 @@ export const uploadImageAction = async (
     };
   }
 
-  const { data } = supabase.storage
-    .from(storagePath)
-    .getPublicUrl(filePath);
+  const { data } = supabase.storage.from(storagePath).getPublicUrl(filePath);
 
   return {
     success: true,

@@ -23,7 +23,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { profileFormSchema } from "@/schema/profile-form";
 import { UserProfile } from "@/types/user";
 
-
 const ProfileForm = ({
   user,
   userProfile,
@@ -33,7 +32,7 @@ const ProfileForm = ({
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(
-    userProfile.avatar_url || null
+    userProfile.avatar_url || null,
   );
 
   const form = useForm<z.infer<typeof profileFormSchema>>({
@@ -116,7 +115,7 @@ const ProfileForm = ({
                   onChange={(e) =>
                     field.onChange(
                       e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase()
+                        e.target.value.slice(1).toLowerCase(),
                     )
                   }
                 />
@@ -140,7 +139,7 @@ const ProfileForm = ({
                   onChange={(e) =>
                     field.onChange(
                       e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase()
+                        e.target.value.slice(1).toLowerCase(),
                     )
                   }
                 />

@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { signOutAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 
-
 const SignOutForm = () => {
   const handleSignOut = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

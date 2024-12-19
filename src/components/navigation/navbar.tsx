@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { createClient } from "@/lib/supabase/server";
+import LocaleSwitcher from "@/components/locale-switcher";
 
 const navItems = [
   { name: "À propos", href: "/a-propos" },
@@ -70,7 +71,9 @@ const Navbar = async () => {
               ))}
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+          <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+            <LocaleSwitcher />
+
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

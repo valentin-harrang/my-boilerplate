@@ -1,0 +1,19 @@
+{
+  "DashboardPage": {
+    "title": "Hello world!"
+  },
+  "LocaleLayout": {
+    "title": "Boilerplate"
+  },
+  "LocaleSwitcher": {
+    "locale": {
+      "en": "Anglais",
+      "fr": "French"
+    }
+  },
+  "NotFoundPage": {
+    "description": "Oops! The page you're looking for doesn't exist.",
+    "returnHome": "Return to Home",
+    "title": "404 - Page Not Found"
+  }
+}

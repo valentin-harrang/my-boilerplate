@@ -23,7 +23,6 @@ import resetPasswordFormSchema from "@/schema/reset-password-form";
 
 import { PasswordStrengthIndicator } from "./password-strength-indicator";
 
-
 const ResetPasswordForm = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
@@ -42,7 +41,7 @@ const ResetPasswordForm = () => {
   const passwordStrength = usePasswordStrength(password);
 
   const togglePasswordVisibility = (
-    field: "password" | "passwordConfirmation"
+    field: "password" | "passwordConfirmation",
   ) => {
     setPasswordVisibility((prev) => ({ ...prev, [field]: !prev[field] }));
   };

@@ -1,8 +1,9 @@
+import { PATHNAMES } from "@/constants/routing";
+import { Locale } from "@/types/i18n";
 import { createServerClient } from "@supabase/ssr";
+import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
-import { ROUTES } from "@/constants/routing";
 
 export const createClient = async () => {
   const cookieStore = await cookies();
@@ -25,14 +26,13 @@ export const createClient = async () => {
           }
         },
       },
-    }
+    },
   );
 };
 
-export const getUserOrRedirect = async (
-  redirectTo: string = ROUTES.SIGN_IN
-) => {
+export const getUserOrRedirect = async () => {
   const supabase = await createClient();
+  const locale = (await getLocale()) as Locale;
 
   const {
     data: { user },
@@ -40,7 +40,7 @@ export const getUserOrRedirect = async (
   } = await supabase.auth.getUser();
 
   if (!user || error) {
-    redirect(redirectTo);
+    redirect(PATHNAMES["/connexion"][locale]);
   }
 
   return user;

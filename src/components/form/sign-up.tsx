@@ -75,7 +75,7 @@ const SignUpForm = () => {
                     onChange={(e) =>
                       field.onChange(
                         e.target.value.charAt(0).toUpperCase() +
-                          e.target.value.slice(1).toLowerCase()
+                          e.target.value.slice(1).toLowerCase(),
                       )
                     }
                   />
@@ -98,7 +98,7 @@ const SignUpForm = () => {
                     onChange={(e) =>
                       field.onChange(
                         e.target.value.charAt(0).toUpperCase() +
-                          e.target.value.slice(1).toLowerCase()
+                          e.target.value.slice(1).toLowerCase(),
                       )
                     }
                   />

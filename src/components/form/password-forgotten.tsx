@@ -28,7 +28,7 @@ const PasswordForgottenForm = () => {
   });
 
   const onSubmit = async (
-    values: z.infer<typeof passwordForgottenFormSchema>
+    values: z.infer<typeof passwordForgottenFormSchema>,
   ) => {
     const formData = new FormData();
     formData.append("email", values.email);
