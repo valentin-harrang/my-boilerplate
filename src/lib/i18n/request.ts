@@ -6,13 +6,9 @@ import { Locale } from "@/types/i18n";
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;
 
-  console.log("locale", locale);
-
   if (!locale || !routing.locales.includes(locale as Locale)) {
     locale = routing.defaultLocale;
   }
-
-  console.log("locale", locale);
 
   return {
     locale,
