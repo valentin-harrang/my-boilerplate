@@ -2,6 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { passwordForgottenAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,10 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { z } from "zod";
 import passwordForgottenFormSchema from "@/schema/password-forgotten-form";
-import { passwordForgottenAction } from "@/app/actions";
 
 const PasswordForgottenForm = () => {
   const form = useForm<z.infer<typeof passwordForgottenFormSchema>>({

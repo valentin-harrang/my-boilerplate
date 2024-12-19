@@ -1,7 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { User as SupabaseUser } from "@supabase/supabase-js";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { updateUserAction, uploadImageAction } from "@/app/actions";
+import DropzoneUpload from "@/components/form/dropzone-upload";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,15 +19,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { z } from "zod";
-import { updateUserAction, uploadImageAction } from "@/app/actions";
-import { profileFormSchema } from "@/schema/profile-form";
 import { Textarea } from "@/components/ui/textarea";
-import DropzoneUpload from "@/components/form/dropzone-upload";
-import { User as SupabaseUser } from "@supabase/supabase-js";
+import { profileFormSchema } from "@/schema/profile-form";
 import { UserProfile } from "@/types/user";
-import { useState } from "react";
+
 
 const ProfileForm = ({
   user,

@@ -1,6 +1,10 @@
 "use client";
 
+import { User } from "@supabase/supabase-js";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -9,9 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useState } from "react";
-import { User } from "@supabase/supabase-js";
-import Link from "next/link";
+
 
 interface NavbarMobileProps {
   navItems: { name: string; href: string }[];

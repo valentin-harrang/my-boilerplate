@@ -1,7 +1,10 @@
-import Link from "next/link";
 import { User, Settings } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+import SignOutForm from "@/components/form/sign-out";
+import NavbarMobile from "@/components/navigation/navbar-mobile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,9 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import NavbarMobile from "@/components/navigation/navbar-mobile";
 import { createClient } from "@/lib/supabase/server";
-import SignOutForm from "@/components/form/sign-out";
 
 const navItems = [
   { name: "À propos", href: "/a-propos" },

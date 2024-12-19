@@ -1,8 +1,9 @@
 "use server";
 
+import { headers } from "next/headers";
+
 import { ROUTES } from "@/constants/routing";
 import { createClient } from "@/lib/supabase/server";
-import { headers } from "next/headers";
 
 interface UpdateUserData {
   description?: string | null;

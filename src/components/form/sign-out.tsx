@@ -1,9 +1,11 @@
 "use client";
 
-import { signOutAction } from "@/app/actions";
-import { redirect } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import { redirect } from "next/navigation";
+
+import { signOutAction } from "@/app/actions";
+import { Button } from "@/components/ui/button";
+
 
 const SignOutForm = () => {
   const handleSignOut = async (event: React.FormEvent<HTMLFormElement>) => {

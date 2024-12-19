@@ -1,7 +1,8 @@
-import { ROUTES } from "@/constants/routing";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+import { ROUTES } from "@/constants/routing";
 
 export const createClient = async () => {
   const cookieStore = await cookies();

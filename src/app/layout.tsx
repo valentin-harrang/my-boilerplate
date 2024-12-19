@@ -1,8 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { Toaster } from "@/components/ui/sonner";
-import "./globals.css";
-import { DEFAULT_URL } from "@/constants/routing";
+
 import Navbar from "@/components/navigation/navbar";
+import { Toaster } from "@/components/ui/sonner";
+import { DEFAULT_URL } from "@/constants/routing";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

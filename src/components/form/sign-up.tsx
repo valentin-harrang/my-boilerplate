@@ -2,6 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { signUpAction } from "@/app/actions";
+import { PasswordStrengthIndicator } from "@/components/form/password-strength-indicator";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,12 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { z } from "zod";
-import signUpFormSchema from "@/schema/sign-up-form";
 import { usePasswordStrength } from "@/hooks/use-password-strength";
-import { PasswordStrengthIndicator } from "@/components/form/password-strength-indicator";
-import { signUpAction } from "@/app/actions";
+import signUpFormSchema from "@/schema/sign-up-form";
 
 const SignUpForm = () => {
   const form = useForm<z.infer<typeof signUpFormSchema>>({

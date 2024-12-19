@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { REGEX } from "@/constants/regex";
 
 const signUpFormSchema = z.object({

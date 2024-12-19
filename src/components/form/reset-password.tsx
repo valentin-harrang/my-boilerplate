@@ -1,7 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { resetPasswordAction } from "@/app/actions";
+import PasswordToggleIcon from "@/components/form/password-toggle-icon";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,14 +18,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { z } from "zod";
-import resetPasswordFormSchema from "@/schema/reset-password-form";
-import { resetPasswordAction } from "@/app/actions";
-import { PasswordStrengthIndicator } from "./password-strength-indicator";
 import { usePasswordStrength } from "@/hooks/use-password-strength";
-import { useState } from "react";
-import PasswordToggleIcon from "@/components/form/password-toggle-icon";
+import resetPasswordFormSchema from "@/schema/reset-password-form";
+
+import { PasswordStrengthIndicator } from "./password-strength-indicator";
+
 
 const ResetPasswordForm = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({

@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
-import { useDropzone } from "react-dropzone";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 import { Upload, X } from "lucide-react";
+import Image from "next/image";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface DropzoneUploadProps {
-  onFileSelect: (file: File | null) => void;
+  onFileSelect: (_file: File | null) => void;
   onImageDelete?: () => Promise<void>;
   className?: string;
   dropText?: string;
@@ -29,7 +30,7 @@ export default function DropzoneUpload({
   initialPreview = null,
 }: DropzoneUploadProps) {
   const [previewImage, setPreviewImage] = useState<string | null>(
-    initialPreview
+    initialPreview,
   );
 
   const onDrop = useCallback(
@@ -41,7 +42,7 @@ export default function DropzoneUpload({
       setPreviewImage(fileUrl);
       onFileSelect(file);
     },
-    [onFileSelect]
+    [onFileSelect],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -64,7 +65,7 @@ export default function DropzoneUpload({
         await onImageDelete();
       }
     },
-    [onFileSelect, onImageDelete, previewImage]
+    [onFileSelect, onImageDelete, previewImage],
   );
 
   useEffect(() => {
@@ -82,7 +83,7 @@ export default function DropzoneUpload({
         isDragActive
           ? "border-primary bg-primary/10"
           : "border-muted-foreground/25",
-        className
+        className,
       )}
       {...getRootProps()}
     >
@@ -95,7 +96,7 @@ export default function DropzoneUpload({
               alt={previewAltText}
               className={cn(
                 "rounded-full w-32 h-32 object-cover",
-                previewImageClassName
+                previewImageClassName,
               )}
               width={128}
               height={128}

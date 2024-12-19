@@ -1,6 +1,7 @@
-import { PROTECTED_ROUTES, ROUTES } from "@/constants/routing";
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
+
+import { PROTECTED_ROUTES, ROUTES } from "@/constants/routing";
 
 export const updateSession = async (request: NextRequest) => {
   let response = NextResponse.next({
