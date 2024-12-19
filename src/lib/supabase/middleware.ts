@@ -66,10 +66,6 @@ export async function updateSession(
     const locale = extractLocaleFromPathname(pathname);
     const strippedPathname = stripLocaleFromPathname(pathname, locale);
 
-    console.log("pathname", pathname);
-    console.log("locale", locale);
-    console.log("strippedPathname", strippedPathname);
-
     if (isForbiddenRoute(locale, strippedPathname)) {
       return NextResponse.redirect(
         new URL(`/${locale}/tableau-de-bord`, request.url),

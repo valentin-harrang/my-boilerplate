@@ -14,14 +14,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { createClient } from "@/lib/supabase/server";
 import LocaleSwitcher from "@/components/locale-switcher";
+import { getTranslations } from "next-intl/server";
 
 const navItems = [
-  { name: "À propos", href: "/a-propos" },
-  { name: "Fonctionnalités", href: "/fonctionnalites" },
+  { name: "about", href: "/a-propos" },
+  { name: "features", href: "/fonctionnalites" },
 ];
 
 const Navbar = async () => {
   const supabase = await createClient();
+  const t = await getTranslations("Navbar");
 
   const {
     data: { user },
@@ -53,7 +55,7 @@ const Navbar = async () => {
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 left-0 right-0 z-10">
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-4">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center">
@@ -66,7 +68,7 @@ const Navbar = async () => {
                   href={item.href}
                   className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium"
                 >
-                  {item.name}
+                  {t(item.name)}
                 </Link>
               ))}
             </div>
@@ -93,11 +95,11 @@ const Navbar = async () => {
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>
                     <User className="mr-2 size-4" />
-                    <span>Profil</span>
+                    <span>{t('profile')}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Settings className="mr-2 size-4" />
-                    <span>Paramètres</span>
+                    <span>{t('settings')}</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
@@ -110,16 +112,16 @@ const Navbar = async () => {
                 <Link
                   href="/connexion"
                   className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-                  title="Connexion"
+                  title={t('sign-in')}
                 >
-                  Connexion
+                  {t('sign-in')}
                 </Link>
                 <Link
                   href="/inscription"
                   className="ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                  title="Inscription"
+                  title={t('sign-up')}
                 >
-                  Inscription
+                  {t('sign-up')}
                 </Link>
               </>
             )}

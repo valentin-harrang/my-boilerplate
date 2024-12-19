@@ -11,9 +11,23 @@
       "fr": "Français"
     }
   },
+  "Navbar": {
+    "about": "À propos",
+    "dashboard": "Tableau de bord",
+    "features": "Fonctionnalités",
+    "home": "Accueil",
+    "logout": "Se déconnecter",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "sign-in": "Se connecter",
+    "sign-up": "S'inscrire"
+  },
   "NotFoundPage": {
     "description": "Oups ! La page que vous recherchez n'existe pas.",
     "returnHome": "Retour à l'accueil",
     "title": "404 - Page non trouvée"
+  },
+  "SignOutForm": {
+    "submit": "Se déconnecter"
   }
 }

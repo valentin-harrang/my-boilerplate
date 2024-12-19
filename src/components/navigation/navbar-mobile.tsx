@@ -13,6 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useTranslations } from "next-intl";
 
 
 interface NavbarMobileProps {
@@ -21,6 +22,7 @@ interface NavbarMobileProps {
 }
 
 const NavbarMobile = ({ navItems, user }: NavbarMobileProps) => {
+  const t = useTranslations("Navbar");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -51,7 +53,7 @@ const NavbarMobile = ({ navItems, user }: NavbarMobileProps) => {
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {item.name}
+                {t(item.name)}
               </Link>
             ))}
             {user ? (
@@ -60,25 +62,25 @@ const NavbarMobile = ({ navItems, user }: NavbarMobileProps) => {
                   href="/profile"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  title="Profil"
+                  title={t('profile')}
                 >
-                  Profil
+                  {t('profile')}
                 </Link>
                 <Link
                   href="/settings"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  title="Paramètres"
+                  title={t('settings')}
                 >
-                  Paramètres
+                  {t('settings')}
                 </Link>
                 <Link
                   href="/deconnexion"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  title="Déconnexion"
+                  title={t('sign-out')}
                 >
-                  Déconnexion
+                  {t('sign-out')}
                 </Link>
               </>
             ) : (
@@ -87,17 +89,17 @@ const NavbarMobile = ({ navItems, user }: NavbarMobileProps) => {
                   href="/connexion"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  title="Connexion"
+                  title={t('sign-in')}
                 >
-                  Connexion
+                  {t('sign-in')}
                 </Link>
                 <Link
                   href="/inscription"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  title="Inscription"
+                  title={t('sign-up')}
                 >
-                  Inscription
+                  {t('sign-up')}
                 </Link>
               </>
             )}

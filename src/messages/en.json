@@ -11,9 +11,23 @@
       "fr": "French"
     }
   },
+  "Navbar": {
+    "about": "About",
+    "dashboard": "Dashboard",
+    "features": "Features",
+    "home": "Home",
+    "profile": "Profile",
+    "settings": "Settings",
+    "sign-in": "Sign In",
+    "sign-out": "Sign Out",
+    "sign-up": "Sign Up"
+  },
   "NotFoundPage": {
     "description": "Oops! The page you're looking for doesn't exist.",
     "returnHome": "Return to Home",
     "title": "404 - Page Not Found"
+  },
+  "SignOutForm": {
+    "submit": "Sign Out"
   }
 }
