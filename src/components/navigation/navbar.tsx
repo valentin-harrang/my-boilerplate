@@ -46,8 +46,8 @@ const Navbar = async () => {
   const getAvatarFallback = () => {
     if (user) {
       return `${user.user_metadata.first_name
-        .charAt(0)
-        .toUpperCase()}${user.user_metadata.last_name.charAt(0).toUpperCase()}`;
+        ?.charAt(0)
+        .toUpperCase()}${user.user_metadata.last_name?.charAt(0).toUpperCase()}`;
     }
 
     return null;

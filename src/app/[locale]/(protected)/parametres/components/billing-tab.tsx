@@ -1,19 +1,28 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function BillingTab() {
   return (
     <div className="space-y-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>Billing Information</CardTitle>
-          <CardDescription>Manage your subscription and payment details.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
+      <section className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-xl font-semibold mb-4">Billing Information</h2>
+        <p className="text-gray-600 mb-6">
+          Manage your subscription and payment details.
+        </p>
+        <div className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Current Plan</CardTitle>
-              <CardDescription>You are currently on the Pro plan.</CardDescription>
+              <CardDescription>
+                You are currently on the Pro plan.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-bold">$29.99 / month</p>
@@ -34,9 +43,8 @@ export default function BillingTab() {
               <Button variant="outline">Update Payment Method</Button>
             </CardFooter>
           </Card>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
     </div>
-  )
+  );
 }
-

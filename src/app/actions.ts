@@ -256,3 +256,60 @@ export const deleteFileFromStorage = async (id: string, filePath: string) => {
 
   return { success: true, message: "File deleted successfully." };
 };
+
+export const deleteAccountAction = async (userId: string) => {
+  const supabase = await createClient();
+
+  // Delete user profile from database
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .delete()
+    .eq("id", userId);
+
+  // Delete all files in the user's storage folder
+  const { data: fileList, error: listError } = await supabase.storage
+    .from("avatars")
+    .list(userId);
+
+  if (listError) {
+    console.error("Error listing files for user:", listError);
+    return {
+      success: false,
+      message: "Failed to list user files.",
+    };
+  }
+
+  const filePaths = fileList?.map((file) => `${userId}/${file.name}`) || [];
+
+  if (filePaths.length > 0) {
+    const { error: deleteFilesError } = await supabase.storage
+      .from("avatars")
+      .remove(filePaths);
+
+    if (deleteFilesError) {
+      console.error("Error deleting user files:", deleteFilesError);
+      return {
+        success: false,
+        message: "Failed to delete user files.",
+      };
+    }
+  }
+
+  // Delete user from authentication
+  const { error: authError } = await supabase.auth.admin.deleteUser(userId);
+
+  console.log("profileError", profileError);
+  console.log("authError", authError);
+
+  if (profileError || authError) {
+    return {
+      success: false,
+      message: "Failed to delete user account.",
+    };
+  }
+
+  return {
+    success: true,
+    message: "Account deleted successfully.",
+  };
+};
