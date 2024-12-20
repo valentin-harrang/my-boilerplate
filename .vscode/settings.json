@@ -6,5 +6,9 @@
     "[json]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "i18n-ally.localesPaths": [
+      "src/messages",
+      "src/lib/i18n"
+    ],
   }
   

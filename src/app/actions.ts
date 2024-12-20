@@ -21,6 +21,7 @@ export const signUpAction = async (formData: FormData) => {
   const password = formData.get("password")?.toString();
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
+  const locale = (await getLocale()) as Locale;
 
   if (!email || !password || !firstName || !lastName) {
     return {
@@ -53,6 +54,7 @@ export const signUpAction = async (formData: FormData) => {
     success: true,
     message:
       "Merci pour votre inscription. Vérifiez vos e-mails pour confirmer votre adresse.",
+    redirect: PATHNAMES["/connexion"][locale],
   };
 };
 
