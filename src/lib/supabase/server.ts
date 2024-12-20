@@ -31,8 +31,10 @@ export const createClient = async () => {
 };
 
 export const getUserOrRedirect = async () => {
-  const supabase = await createClient();
-  const locale = (await getLocale()) as Locale;
+  const [supabase, locale] = await Promise.all([
+    createClient(),
+    getLocale() as Promise<Locale>,
+  ]);
 
   const {
     data: { user },
