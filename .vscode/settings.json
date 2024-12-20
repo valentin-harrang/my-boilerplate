@@ -1,14 +1,10 @@
 {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "always",
-      "source.fixAll.sortJSON": "always"
-    },
-    "[json]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "i18n-ally.localesPaths": [
-      "src/messages",
-      "src/lib/i18n"
-    ],
-  }
-  
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.sortJSON": "always"
+  },
+  "i18n-ally.localesPaths": ["src/messages", "src/lib/i18n"]
+}

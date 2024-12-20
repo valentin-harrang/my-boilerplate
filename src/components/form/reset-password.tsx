@@ -26,30 +26,28 @@ import { PasswordStrengthIndicator } from "./password-strength-indicator";
 const ResetPasswordForm = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
-    passwordConfirmation: false,
+    confirmPassword: false,
   });
   const form = useForm<z.infer<typeof resetPasswordFormSchema>>({
     resolver: zodResolver(resetPasswordFormSchema),
     mode: "onChange",
     defaultValues: {
       password: "",
-      passwordConfirmation: "",
+      confirmPassword: "",
     },
   });
 
   const password = form.watch("password");
   const passwordStrength = usePasswordStrength(password);
 
-  const togglePasswordVisibility = (
-    field: "password" | "passwordConfirmation",
-  ) => {
+  const togglePasswordVisibility = (field: "password" | "confirmPassword") => {
     setPasswordVisibility((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
   const onSubmit = async (values: z.infer<typeof resetPasswordFormSchema>) => {
     const formData = new FormData();
     formData.append("password", values.password);
-    formData.append("passwordConfirmation", values.passwordConfirmation);
+    formData.append("confirmPassword", values.confirmPassword);
 
     try {
       const response = await resetPasswordAction(formData);
@@ -68,7 +66,7 @@ const ResetPasswordForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="password"
@@ -115,7 +113,7 @@ const ResetPasswordForm = () => {
 
         <FormField
           control={form.control}
-          name="passwordConfirmation"
+          name="confirmPassword"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Confirmez le mot de passe</FormLabel>
@@ -123,9 +121,7 @@ const ResetPasswordForm = () => {
                 <div className="relative">
                   <Input
                     type={
-                      passwordVisibility.passwordConfirmation
-                        ? "text"
-                        : "password"
+                      passwordVisibility.confirmPassword ? "text" : "password"
                     }
                     placeholder="******"
                     autoCapitalize="none"
@@ -138,17 +134,15 @@ const ResetPasswordForm = () => {
                     variant="ghost"
                     size="sm"
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() =>
-                      togglePasswordVisibility("passwordConfirmation")
-                    }
+                    onClick={() => togglePasswordVisibility("confirmPassword")}
                     aria-label={
-                      passwordVisibility.passwordConfirmation
+                      passwordVisibility.confirmPassword
                         ? `Hide password confirmation`
                         : `Show password confirmation`
                     }
                   >
                     <PasswordToggleIcon
-                      isVisible={passwordVisibility.passwordConfirmation}
+                      isVisible={passwordVisibility.confirmPassword}
                     />
                   </Button>
                 </div>
@@ -164,7 +158,7 @@ const ResetPasswordForm = () => {
         >
           {form.formState.isSubmitting
             ? "En cours..."
-            : "Réinitialiser le mot de passe"}
+            : "Mettre à jour le mot de passe"}
         </Button>
       </form>
     </Form>

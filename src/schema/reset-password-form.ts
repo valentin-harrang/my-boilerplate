@@ -24,12 +24,12 @@ const resetPasswordFormSchema = z
         message:
           "Votre mot de passe doit contenir au moins un caractère spécial.",
       }),
-    passwordConfirmation: z.string({
+    confirmPassword: z.string({
       required_error: "Veuillez confirmer votre mot de passe.",
     }),
   })
-  .refine((data) => data.password === data.passwordConfirmation, {
-    path: ["passwordConfirmation"],
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
     message: "Les mots de passe ne correspondent pas.",
   });
 

@@ -40,6 +40,7 @@ export const profileFormSchema = z.object({
       message: "La description ne doit pas contenir plus de 500 caractères.",
     })
     .optional(),
+  avatar: z.string().optional(),
 });
 
 export type ProfileFormValues = z.infer<typeof profileFormSchema>;

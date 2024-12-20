@@ -1,6 +1,10 @@
-import SettingsForm from "@/components/form/settings";
 import { getUserOrRedirect, getUserProfile } from "@/lib/supabase/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Breadcrumb from "@/components/navigation/breadcrumb";
+import SettingsTab from "./components/settings-tab";
+import BillingTab from "./components/billing-tab";
+import NotificationsTab from "./components/notifications-tab";
 
 const SettingsPage = async () => {
   const user = await getUserOrRedirect();
@@ -12,12 +16,28 @@ const SettingsPage = async () => {
 
   return (
     <div className="container mx-auto py-10">
-      <Card>
+      <Breadcrumb />
+      <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Paramètres du profil</CardTitle>
+          <CardTitle>Account Settings</CardTitle>
         </CardHeader>
         <CardContent>
-          <SettingsForm user={user} userProfile={userProfile} />
+          <Tabs defaultValue="settings">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+              <TabsTrigger value="billing">Billing</TabsTrigger>
+              <TabsTrigger value="notifications">Notifications</TabsTrigger>
+            </TabsList>
+            <TabsContent value="settings">
+              <SettingsTab user={user} userProfile={userProfile} />
+            </TabsContent>
+            <TabsContent value="billing">
+              <BillingTab />
+            </TabsContent>
+            <TabsContent value="notifications">
+              <NotificationsTab />
+            </TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
     </div>

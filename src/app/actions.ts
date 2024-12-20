@@ -136,6 +136,13 @@ export const resetPasswordAction = async (formData: FormData) => {
   const { error } = await supabase.auth.updateUser({ password });
 
   if (error) {
+    if (error.code === "same_password") {
+      return {
+        success: false,
+        message: "Le nouveau mot de passe doit être différent de l'ancien.",
+      };
+    }
+
     return {
       success: false,
       message: "Impossible de mettre à jour le mot de passe.",
@@ -194,14 +201,13 @@ export const updateUserAction = async (
   if (profileError || authError) {
     return {
       success: false,
-      message:
-        "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
+      message: "Une erreur est survenue.",
     };
   }
 
   return {
     success: true,
-    message: "Utilisateur mis à jour avec succès.",
+    message: "Mise à jour réussie.",
   };
 };
 
@@ -234,4 +240,19 @@ export const uploadImageAction = async (
     message: "Image uploadée avec succès.",
     publicUrl: data?.publicUrl || null,
   };
+};
+
+export const deleteFileFromStorage = async (id: string, filePath: string) => {
+  const supabase = await createClient();
+  const { error } = await supabase.storage.from(id).remove([filePath]);
+
+  if (error) {
+    console.error("Error deleting file:", error);
+    return {
+      success: false,
+      message: "Error deleting file from storage.",
+    };
+  }
+
+  return { success: true, message: "File deleted successfully." };
 };

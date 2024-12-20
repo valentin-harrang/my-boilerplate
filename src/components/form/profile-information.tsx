@@ -2,13 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User as SupabaseUser } from "@supabase/supabase-js";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { updateUserAction, uploadImageAction } from "@/app/actions";
-import DropzoneUpload from "@/components/form/dropzone-upload";
+import { updateUserAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,18 +21,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { profileFormSchema } from "@/schema/profile-form";
 import { UserProfile } from "@/types/user";
 
-const SettingsForm = ({
+const ProfileInformationForm = ({
   user,
   userProfile,
 }: {
   user: SupabaseUser;
   userProfile: UserProfile;
 }) => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string | null>(
-    userProfile.avatar_url || null,
-  );
-
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
     mode: "onChange",
@@ -48,47 +41,16 @@ const SettingsForm = ({
 
   const isLoading = form.formState.isSubmitting;
 
-  const handleImageUpload = async () => {
-    if (!selectedImage) return previewImage || "";
-
-    const response = await uploadImageAction(user.id, selectedImage, "avatars");
-
-    if (!response.success) {
-      toast.error(response.message);
-      return previewImage || "";
-    }
-
-    return response.publicUrl;
-  };
-
-  const handleImageDelete = async () => {
-    if (!previewImage) return;
-
-    const response = await updateUserAction(user.id, { avatar_url: null });
-
-    if (response.success) {
-      toast.success("Photo de profil supprimée avec succès.");
-      setPreviewImage(null);
-      setSelectedImage(null);
-    } else {
-      toast.error(response.message);
-    }
-  };
-
   const onSubmit = async (values: z.infer<typeof profileFormSchema>) => {
     try {
-      const avatarUrl = await handleImageUpload();
-
       const response = await updateUserAction(user.id, {
         first_name: values.firstName,
         last_name: values.lastName,
         description: values.description,
-        avatar_url: avatarUrl,
       });
 
       if (response.success) {
         toast.success(response.message);
-        setPreviewImage(avatarUrl || null);
       } else {
         toast.error(response.message);
       }
@@ -187,26 +149,7 @@ const SettingsForm = ({
           )}
         />
 
-        <FormItem>
-          <FormLabel>Photo de profil</FormLabel>
-          <DropzoneUpload
-            onFileSelect={(file) => {
-              setSelectedImage(file);
-              if (file) {
-                setPreviewImage(URL.createObjectURL(file));
-              }
-            }}
-            onImageDelete={handleImageDelete}
-            className="mt-4"
-            initialPreview={previewImage}
-          />
-        </FormItem>
-
-        <Button
-          type="submit"
-          disabled={!form.formState.isValid || isLoading}
-          className="ml-auto block"
-        >
+        <Button type="submit" disabled={!form.formState.isValid || isLoading}>
           {isLoading ? "Mise à jour en cours ..." : "Mettre à jour"}
         </Button>
       </form>
@@ -214,4 +157,4 @@ const SettingsForm = ({
   );
 };
 
-export default SettingsForm;
+export default ProfileInformationForm;
