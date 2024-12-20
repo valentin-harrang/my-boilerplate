@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -87,6 +88,15 @@ const SignInForm = () => {
             </FormItem>
           )}
         />
+        <div className="text-sm">
+          <Link
+            href="/mot-de-passe-oublie"
+            className="text-primary hover:underline"
+            title="Réinitialiser le mot de passe"
+          >
+            Vous avez oublié votre mot de passe ?
+          </Link>
+        </div>
         <Button
           type="submit"
           className="w-full"
