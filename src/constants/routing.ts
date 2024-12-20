@@ -17,9 +17,9 @@ export const PATHNAMES = {
     [LocaleEnum.EN]: "/sign-up",
     [LocaleEnum.FR]: "/inscription",
   },
-  "/mon-compte": {
-    [LocaleEnum.EN]: "/account",
-    [LocaleEnum.FR]: "/mon-compte",
+  "/parametres": {
+    [LocaleEnum.EN]: "/settings",
+    [LocaleEnum.FR]: "/parametres",
   },
   "/reinitialisation-mot-de-passe": {
     [LocaleEnum.EN]: "/reset-password",
@@ -40,6 +40,6 @@ export const PATHNAMES = {
 };
 
 export const FORBIDDEN_PATHNAMES_FOR_AUTHENTICATED_USERS = {
-  fr: ["/", "/connexion", "/inscription", "/mot-de-passe-oublie"],
-  en: ["/", "/sign-in", "/sign-up", "/forgot-password"],
+  [LocaleEnum.FR]: ["/", "/connexion", "/inscription", "/mot-de-passe-oublie"],
+  [LocaleEnum.EN]: ["/", "/sign-in", "/sign-up", "/forgot-password"],
 };

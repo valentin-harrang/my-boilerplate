@@ -23,7 +23,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { profileFormSchema } from "@/schema/profile-form";
 import { UserProfile } from "@/types/user";
 
-const ProfileForm = ({
+const SettingsForm = ({
   user,
   userProfile,
 }: {
@@ -100,7 +100,7 @@ const ProfileForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="firstName"
@@ -214,4 +214,4 @@ const ProfileForm = ({
   );
 };
 
-export default ProfileForm;
+export default SettingsForm;

@@ -59,7 +59,7 @@ const NavbarMobile = ({ navItems, user }: NavbarMobileProps) => {
             {user ? (
               <>
                 <Link
-                  href="/profile"
+                  href="/profil"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsMobileMenuOpen(false)}
                   title={t('profile')}
@@ -67,7 +67,7 @@ const NavbarMobile = ({ navItems, user }: NavbarMobileProps) => {
                   {t('profile')}
                 </Link>
                 <Link
-                  href="/settings"
+                  href="/parametres"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsMobileMenuOpen(false)}
                   title={t('settings')}

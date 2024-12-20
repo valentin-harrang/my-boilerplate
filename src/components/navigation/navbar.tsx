@@ -93,14 +93,16 @@ const Navbar = async () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
                     <User className="mr-2 size-4" />
-                    <span>{t('profile')}</span>
+                    <span>{t("profile")}</span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Settings className="mr-2 size-4" />
-                    <span>{t('settings')}</span>
-                  </DropdownMenuItem>
+                  <Link href="/parametres" title={t("settings")}>
+                    <DropdownMenuItem className="cursor-pointer">
+                      <Settings className="mr-2 size-4" />
+                      <span>{t("settings")}</span>
+                    </DropdownMenuItem>
+                  </Link>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <SignOutForm />
@@ -112,16 +114,16 @@ const Navbar = async () => {
                 <Link
                   href="/connexion"
                   className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-                  title={t('sign-in')}
+                  title={t("sign-in")}
                 >
-                  {t('sign-in')}
+                  {t("sign-in")}
                 </Link>
                 <Link
                   href="/inscription"
                   className="ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                  title={t('sign-up')}
+                  title={t("sign-up")}
                 >
-                  {t('sign-up')}
+                  {t("sign-up")}
                 </Link>
               </>
             )}
